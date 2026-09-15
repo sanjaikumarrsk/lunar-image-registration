@@ -1,72 +1,193 @@
-# Lunar Image Registration
+# 🌙 LUNAR IMAGE REGISTRATION
 
-An upload-driven lunar image registration demo with a FastAPI backend, React/Vite frontend, MongoDB persistence, and a geometric LoFTR matching pipeline.
+## 🚀 AI-Powered Cross-Modal Lunar Image Registration System
 
-## What is included
+A smart lunar image registration system designed to identify accurate corresponding points between source and reference lunar images and align them into a common coordinate system using AI-based feature matching, geometric verification, and image registration.
 
-- `backend/`: FastAPI API, MongoDB store, image preprocessing, matching, refinement, validation, and registration pipeline.
-- `frontend/`: React/Vite demo UI.
-- `models/finetuned_loftr/kaguya_geometric/best_model.pth`: checkpoint used by the default LoFTR pipeline.
-- `configs/loftr.yaml`: LoFTR training configuration.
-- `requirements.txt` and `frontend/package-lock.json`: runtime dependency manifests.
+The system is designed to handle challenging lunar imagery with differences in illumination, resolution, viewing angle, scale, and sensor characteristics using LoFTR, illumination-robust feature processing, RANSAC filtering, and adaptive tie-point refinement. 🌙🛰️
 
-Raw lunar datasets, downloaded DEMs, generated run artifacts, caches, and duplicate checkpoints are intentionally excluded. The web demo accepts source and reference images as uploads, so the repository can run without a bundled dataset.
+The system supports lunar imagery from multiple sensors and incorporates DEM and physical-geometry information when the required geometric information is available. 🔭📐
 
-## Setup
+---
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
+# ✨ Key Features
 
-cd frontend
-npm install
-```
+✅ Cross-Modal Lunar Image Matching  
+✅ AI-Based Tie-Point Detection  
+✅ LoFTR Feature Matching  
+✅ Illumination-Robust Feature Processing  
+✅ Multi-Scale Image Representation  
+✅ Candidate Correspondence Filtering  
+✅ Uniform Grid-Based Tie-Point Selection  
+✅ RANSAC Outlier Filtering  
+✅ Confidence-Based Match Evaluation  
+✅ Adaptive Sub-Pixel Refinement  
+✅ DEM-Assisted Geometric Validation  
+✅ Image Registration and Alignment  
+✅ Quantitative Registration Evaluation  
+✅ Tie-Point Visualization  
+✅ Registered Image Generation  
+✅ Overlay and Difference Visualization  
+✅ MongoDB-Based Result Storage  
 
-PyTorch may need a platform-specific installation command for GPU support. The pipeline automatically uses CUDA when available and otherwise runs on CPU.
+---
 
-## MongoDB
+# 🛠️ Technologies Used
 
-Start MongoDB locally or provide these environment variables before starting the backend:
+## 🤖 Artificial Intelligence & Computer Vision
 
-```powershell
-$env:MONGO_URI = "mongodb://localhost:27017"
-$env:MONGO_DATABASE = "lunar"
-$env:MONGO_COLLECTION = "lunarimage"
-```
+- PyTorch
+- LoFTR
+- OpenCV
+- NumPy
+- SIFT
+- RANSAC
 
-The API remains available when MongoDB is unavailable, but registration history persistence and history endpoints require a reachable MongoDB instance.
+## 🌍 Geospatial & Lunar Data Processing
 
-## Run the demo
+- GDAL
+- DEM / Elevation Data
+- Lunar Image Geometry
+- Coordinate Transformation
 
-From the repository root, start the backend:
+## ⚙️ Backend
 
-```powershell
-python -m uvicorn backend.api.api_server:app --reload --port 8000
-```
+- Python
+- FastAPI
 
-In a second terminal, start the frontend:
+## 🎨 Frontend
 
-```powershell
-cd frontend
-npm run dev
-```
+- React
+- JavaScript
+- HTML
+- CSS
 
-Open the Vite URL shown in the terminal, upload two lunar images, and select **Run Registration**. The API stores generated artifacts under `runs/`; that directory is ignored by Git.
+## 🗄️ Database
 
-For a direct pipeline run without the UI:
+- MongoDB
 
-```powershell
-python backend/run_pipeline.py --source path\to\source.png --reference path\to\reference.png --method loftr
-```
+## 🔧 Development Tools
 
-Use `--method sift` when a LoFTR checkpoint is not desired. Outputs are written to the ignored `results/` directory unless `--output-dir` is supplied.
+- Git
+- GitHub
+- VS Code
 
-## API checks
+---
 
-```text
-GET  /api/health
-POST /api/register   (multipart fields: source, reference)
-```
+# ⚙️ System Workflow
 
-Set `frontend/.env` from `frontend/.env.example` if the backend runs at a different URL.
+1️⃣ User provides a source lunar image and a reference lunar image
+
+2️⃣ System performs input and metadata/context checks
+
+3️⃣ Relevant DEM and geographic information are retrieved when available
+
+4️⃣ Images are preprocessed and represented at multiple scales
+
+5️⃣ Illumination-robust features are extracted
+
+6️⃣ LoFTR identifies candidate correspondences between the images
+
+7️⃣ Candidate matches are filtered and distributed using uniform grid selection
+
+8️⃣ RANSAC removes geometrically inconsistent matches
+
+9️⃣ Match confidence is evaluated
+
+🔟 Tie points are refined toward sub-pixel accuracy
+
+1️⃣1️⃣ DEM/physical geometry is used for validation when the required information is available
+
+1️⃣2️⃣ Final reliable tie points are generated
+
+1️⃣3️⃣ The source image is registered to the reference image
+
+1️⃣4️⃣ Registration quality is evaluated using quantitative metrics
+
+1️⃣5️⃣ Final tie points, registered image, overlay, and evaluation results are generated
+
+---
+
+# 🔬 Core Modules
+
+🔹 Image Input & Validation  
+🔹 Metadata & Context Analysis  
+🔹 DEM Retrieval  
+🔹 Multi-Scale Representation  
+🔹 Illumination-Robust Feature Extraction  
+🔹 LoFTR Matching  
+🔹 Candidate Correspondence Filtering  
+🔹 Uniform Grid Tie-Point Selection  
+🔹 RANSAC Outlier Filtering  
+🔹 Confidence Evaluation  
+🔹 Sub-Pixel Refinement  
+🔹 Geometric / DEM Validation  
+🔹 Image Registration  
+🔹 Quantitative Validation  
+🔹 Result Storage  
+
+---
+
+# 📊 Evaluation Metrics
+
+The system evaluates registration quality using:
+
+- Number of source keypoints
+- Number of reference keypoints
+- Candidate matches
+- RANSAC inliers
+- RANSAC outliers
+- Inlier ratio
+- Mean reprojection error
+- Median reprojection error
+- Reprojection RMSE
+- Processing time
+
+These metrics help determine the reliability and accuracy of the final registration result. 📈
+
+---
+
+# 📦 Final Outputs
+
+The system generates:
+
+🔗 Final Tie Points  
+🖼️ Registered Source Image  
+🔍 Tie-Point Visualization  
+🌗 Overlay / Difference Image  
+📊 Registration Metrics  
+📄 Tie-Point Data  
+📋 Processing Report  
+
+---
+
+# 🎯 Project Objectives
+
+- Improve correspondence between multi-sensor lunar images 🌙
+- Handle illumination and resolution differences
+- Generate spatially distributed tie points
+- Remove unreliable feature correspondences
+- Improve tie-point localization through refinement
+- Use terrain and physical geometry when available
+- Produce accurately registered lunar imagery
+- Provide measurable registration quality through quantitative evaluation
+
+---
+
+# 💡 Why This System?
+
+Traditional feature matching can struggle when two lunar images have significant differences in illumination, resolution, viewpoint, or sensor characteristics.
+
+This system combines **AI-based matching, geometric consistency, spatially distributed tie points, refinement, and physical/terrain information** to provide a more reliable lunar image registration workflow. 🛰️🌙
+
+---
+
+# 📌 Conclusion
+
+This project demonstrates an AI-driven lunar image registration pipeline for establishing reliable correspondences between multi-sensor lunar imagery. By combining LoFTR-based matching, illumination-robust processing, uniform tie-point selection, RANSAC filtering, sub-pixel refinement, geometric validation, and image registration, the system provides a complete workflow for accurate lunar image alignment.
+
+The architecture is designed to support challenging cross-modal lunar imagery while providing quantitative metrics and visual outputs for evaluating registration quality. 🚀🔭
+
+---
+
+## ⭐ Lunar Imaging • AI Matching • Tie Points • Image Registration
