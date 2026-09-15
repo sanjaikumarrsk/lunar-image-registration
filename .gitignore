@@ -1,0 +1,65 @@
+# Python bytecode, caches, environments, and test output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+ENV/
+
+# Node/Vite dependencies and generated frontend bundles
+node_modules/
+frontend/dist/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime output and logs
+runs/
+results/
+output/
+logs/
+*.log
+tmp/
+temp/
+
+# Raw and downloaded lunar datasets
+data/
+*.img
+*.qub
+*.tif
+*.tiff
+*.lbl
+*.oat
+*.oath
+*.lbr
+*.spm
+
+# Model artifacts: keep only the checkpoint used by the demo pipeline
+models/**/*.pth
+models/**/*.pt
+models/**/*.ckpt
+models/**/*.bin
+models/**/*.onnx
+!models/finetuned_loftr/kaguya_geometric/best_model.pth
+models/**/training_*.csv
+models/**/training_*.json
+
+# Secrets and local environment files
+.env
+.env.*
+!.env.example
+
+# IDE/editor and operating-system files
+.vscode/
+.idea/
+.metals/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

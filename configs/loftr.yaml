@@ -1,0 +1,17 @@
+# Configuration used by train.py. The 128-pixel synthetic patch size keeps
+# CPU execution feasible; real products are evaluated with tiled/resized input.
+model: loftr
+pretrained_checkpoint: models/pretrained/loftr_outdoor.ckpt
+image_resolution: [128, 128]
+batch_size: 1
+learning_rate: 0.00001
+optimizer: AdamW
+weight_decay: 0.0001
+scheduler: cosine
+epochs: 3
+checkpoint_frequency: 1
+validation_frequency: 1
+device: auto
+random_seed: 20260907
+supervision: synthetic_known_h
+real_pair_ground_truth: unavailable
