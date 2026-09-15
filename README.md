@@ -58,9 +58,7 @@ The system supports lunar imagery from multiple sensors and incorporates DEM and
 ## 🎨 Frontend
 
 - React
-- JavaScript
-- HTML
-- CSS
+
 
 ## 🗄️ Database
 
